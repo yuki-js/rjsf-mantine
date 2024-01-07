@@ -1,6 +1,5 @@
 import {
   ariaDescribedByIds,
-  enumOptionsIsSelected,
   enumOptionsValueForIndex,
   optionId,
   FormContextType,

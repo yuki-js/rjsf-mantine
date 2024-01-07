@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, SyntheticEvent, useCallback } from 'react';
+import { useCallback } from 'react';
 import {
   ariaDescribedByIds,
   enumOptionsIndexForValue,
@@ -9,17 +9,7 @@ import {
   StrictRJSFSchema,
   WidgetProps,
 } from '@rjsf/utils';
-import { ComboboxItem, MultiSelect, Select } from '@mantine/core';
-
-function getValue(event: SyntheticEvent<HTMLSelectElement>, multiple: boolean) {
-  if (multiple) {
-    return Array.from((event.target as HTMLSelectElement).options)
-      .slice()
-      .filter((o) => o.selected)
-      .map((o) => o.value);
-  }
-  return (event.target as HTMLSelectElement).value;
-}
+import { MultiSelect, Select } from '@mantine/core';
 
 /** The `SelectWidget` is a widget for rendering dropdowns.
  *  It is typically used with string properties constrained with enum options.

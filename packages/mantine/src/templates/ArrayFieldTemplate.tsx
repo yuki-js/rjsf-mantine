@@ -10,7 +10,7 @@ import {
   UI_OPTIONS_KEY,
 } from '@rjsf/utils';
 
-import { cleanClassNames, getMantineProps } from '../../util';
+import { cleanClassNames, getMantineProps } from '../util';
 import { Group, Stack, Divider } from '@mantine/core';
 
 /** The `ArrayFieldTemplate` component is the template used to render all items in an array.

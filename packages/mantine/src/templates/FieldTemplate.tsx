@@ -8,7 +8,7 @@ import {
 } from '@rjsf/utils';
 
 import { Input } from '@mantine/core';
-import { getMantineProps, MaybeWrap } from '../../util';
+import { getMantineProps, MaybeWrap } from '../util';
 
 /** The `FieldTemplate` component is the template used by `SchemaField` to render any field. It renders the field
  * content, (label, description, children, errors and help) inside of a `WrapIfAdditional` component.

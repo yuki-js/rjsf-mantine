@@ -1,13 +1,6 @@
-import { ChangeEvent } from 'react';
-
 import {
   ariaDescribedByIds,
-  enumOptionsDeselectValue,
-  enumOptionsIsSelected,
-  enumOptionsSelectValue,
-  getTemplate,
   optionId,
-  titleId,
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
@@ -16,7 +9,7 @@ import {
   enumOptionsValueForIndex,
   enumOptionsIndexForValue,
 } from '@rjsf/utils';
-import { Checkbox, Group, Input } from '@mantine/core';
+import { Checkbox, Group } from '@mantine/core';
 
 /** The `CheckboxesWidget` is a widget for rendering checkbox groups.
  *  It is typically used to represent an array of enums.
