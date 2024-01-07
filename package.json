@@ -60,17 +60,9 @@
     "typescript": "^4.9.5"
   },
   "workspaces": [
-    "packages/antd",
-    "packages/bootstrap-4",
-    "packages/chakra-ui",
     "packages/core",
     "packages/docs",
-    "packages/fluent-ui",
-    "packages/fluentui-rc",
-    "packages/material-ui",
-    "packages/mui",
     "packages/playground",
-    "packages/semantic-ui",
     "packages/utils",
     "packages/validator-ajv6",
     "packages/validator-ajv8",
