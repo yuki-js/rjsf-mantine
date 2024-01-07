@@ -1,6 +1,5 @@
-import { useState, useRef, useCallback, cloneElement, ReactElement, ReactNode } from 'react';
-import createCache, { EmotionCache } from '@emotion/cache';
-import { create, Jss } from 'jss';
+import { useRef, useCallback, ReactElement, ReactNode } from 'react';
+import Frame, { FrameComponentProps } from 'react-frame-component';
 
 /*
 Adapted from https://github.com/mui-org/material-ui/blob/master/docs/src/modules/components/DemoSandboxed.js
@@ -39,13 +38,6 @@ interface DemoFrameProps extends FrameComponentProps {
 export default function DemoFrame(props: DemoFrameProps) {
   const { children, head, theme, ...frameProps } = props;
 
-  const [jss, setJss] = useState<Jss>();
-  const [ready, setReady] = useState(false);
-  const [sheetsManager, setSheetsManager] = useState(new Map());
-  const [emotionCache, setEmotionCache] = useState<EmotionCache>(createCache({ key: 'css' }));
-  const [container, setContainer] = useState();
-  const [window, setWindow] = useState();
-
   const instanceRef = useRef<any>();
 
   const handleRef = useCallback(
@@ -58,27 +50,9 @@ export default function DemoFrame(props: DemoFrameProps) {
     [instanceRef]
   );
 
-  const onContentDidMount = useCallback(() => {
-    setReady(true);
-    setJss(
-      create({
-        plugins: jssPreset().plugins,
-        insertionPoint: instanceRef.current.contentWindow['demo-frame-jss'],
-      })
-    );
-    setSheetsManager(new Map());
-    setEmotionCache(
-      createCache({
-        key: 'css',
-        prepend: true,
-        container: instanceRef.current.contentWindow['demo-frame-jss'],
-      })
-    );
-    setContainer(instanceRef.current.contentDocument.body);
-    setWindow(() => instanceRef.current.contentWindow);
-  }, []);
+  const onContentDidMount = useCallback(() => {}, []);
 
-  let body: ReactNode = children;
+  const body: ReactNode = children;
 
   return (
     <Frame ref={handleRef} contentDidMount={onContentDidMount} head={head} {...frameProps}>

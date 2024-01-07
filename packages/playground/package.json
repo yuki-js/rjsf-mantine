@@ -34,7 +34,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.22.15",
-    "@mui/material": "^5.14.8",
     "@rjsf/core": "^5.15.1",
     "@rjsf/utils": "^5.15.1",
     "@rjsf/validator-ajv6": "^5.15.1",
