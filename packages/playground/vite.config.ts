@@ -23,6 +23,7 @@ export default defineConfig({
       //
       // the difference when mapping directly vs mapping to src folder - @vitejs/plugin-react can not be applied in the 2nd case
       '@rjsf/validator-ajv6': '@rjsf/validator-ajv6/src',
+      '@rjsf/mantine': path.resolve(__dirname, '../mantine/src'),
     },
   },
 });

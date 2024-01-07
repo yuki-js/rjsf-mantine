@@ -6,6 +6,7 @@ import Ajv2020 from 'ajv/dist/2020.js';
 
 import Layout from './layout';
 import Playground, { PlaygroundProps } from './components';
+import MantineTheme from '@rjsf/mantine';
 
 // @ts-expect-error todo: error TS2345: Argument of type 'Localize' is not assignable to parameter of type 'Localizer'.
 const esV8Validator = customizeValidator({}, localize_es);
@@ -80,6 +81,10 @@ const themes: PlaygroundProps['themes'] = {
         stylesheet: '//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/yeti/bootstrap.min.css',
       },
     },
+  },
+  mantine: {
+    stylesheet: '',
+    theme: MantineTheme,
   },
 };
 
