@@ -1,18 +1,8 @@
-import { FormProps, withTheme } from '@rjsf/core';
-import { FormContextType, RJSFSchema, StrictRJSFSchema } from '@rjsf/utils';
-import { ComponentType } from 'react';
-import { generateTemplates } from './templates';
-import { generateWidgets } from './widgets';
+import Form from './Form';
 
-export function generateForm<
-  T = any,
-  S extends StrictRJSFSchema = RJSFSchema,
-  F extends FormContextType = any
->(): ComponentType<FormProps<T, S, F>> {
-  return withTheme<T, S, F>({
-    templates: generateTemplates<T, S, F>(),
-    widgets: generateWidgets<T, S, F>(),
-  });
-}
+export { default as Form, generateForm } from './Form';
+export { default as Templates, generateTemplates } from './templates';
+export { default as Theme, generateTheme } from './theme';
+export { default as Widgets, generateWidgets } from './widgets';
 
-export default generateForm();
+export default Form;
