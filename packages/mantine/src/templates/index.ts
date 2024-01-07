@@ -1,3 +1,5 @@
+import { FormContextType, RJSFSchema, StrictRJSFSchema, TemplatesType } from '@rjsf/utils';
+
 import BaseInputTemplate from './BaseInputTemplate';
 import FieldErrorTemplate from './FieldErrorTemplate';
 import ErrorListTemplate from './ErrorListTemplate';
@@ -13,25 +15,32 @@ import DescriptionFieldTemplate from './DescriptionFieldTemplate';
 import ArrayFieldItemTemplate from './ArrayFieldItemTemplate';
 import ArrayFieldTemplate from './ArrayFieldTemplate';
 
-const ButtonTemplates = {
-  SubmitButton,
-  AddButton,
-  RemoveButton,
-  CopyButton,
-  MoveDownButton,
-  MoveUpButton,
-};
+export function generateTemplates<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any
+>(): Partial<TemplatesType<T, S, F>> {
+  const ButtonTemplates = {
+    SubmitButton,
+    AddButton,
+    RemoveButton,
+    CopyButton,
+    MoveDownButton,
+    MoveUpButton,
+  };
+  return {
+    ArrayFieldItemTemplate,
+    ArrayFieldTemplate,
+    BaseInputTemplate,
+    FieldErrorTemplate,
+    ErrorListTemplate,
+    ButtonTemplates,
+    FieldTemplate,
+    WrapIfAdditionalTemplate,
+    ObjectFieldTemplate,
+    TitleFieldTemplate,
+    DescriptionFieldTemplate,
+  };
+}
 
-export {
-  ArrayFieldItemTemplate,
-  ArrayFieldTemplate,
-  BaseInputTemplate,
-  FieldErrorTemplate,
-  ErrorListTemplate,
-  ButtonTemplates,
-  FieldTemplate,
-  WrapIfAdditionalTemplate,
-  ObjectFieldTemplate,
-  TitleFieldTemplate,
-  DescriptionFieldTemplate,
-};
+export default generateTemplates();
