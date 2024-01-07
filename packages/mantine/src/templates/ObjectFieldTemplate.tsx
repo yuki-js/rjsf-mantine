@@ -1,4 +1,4 @@
-import { Fieldset, Group, Box } from "@mantine/core";
+import { Fieldset, Group, Box } from '@mantine/core';
 import {
   FormContextType,
   ObjectFieldTemplatePropertyType,
@@ -10,7 +10,7 @@ import {
   getTemplate,
   getUiOptions,
   titleId,
-} from "@rjsf/utils";
+} from '@rjsf/utils';
 
 /** The `ObjectFieldTemplate` is the template to use to render all the inner properties of an object along with the
  * title and description if available. If the object is expandable, then an `AddButton` is also rendered after all
@@ -21,7 +21,7 @@ import {
 export default function ObjectFieldTemplate<
   T = any,
   S extends StrictRJSFSchema = RJSFSchema,
-  F extends FormContextType = any,
+  F extends FormContextType = any
 >(props: ObjectFieldTemplateProps<T, S, F>) {
   const {
     description,
@@ -38,23 +38,18 @@ export default function ObjectFieldTemplate<
     uiSchema,
   } = props;
   const options = getUiOptions<T, S, F>(uiSchema);
-  const TitleFieldTemplate = getTemplate<"TitleFieldTemplate", T, S, F>(
-    "TitleFieldTemplate",
+  const TitleFieldTemplate = getTemplate<'TitleFieldTemplate', T, S, F>('TitleFieldTemplate', registry, options);
+  const DescriptionFieldTemplate = getTemplate<'DescriptionFieldTemplate', T, S, F>(
+    'DescriptionFieldTemplate',
     registry,
-    options,
+    options
   );
-  const DescriptionFieldTemplate = getTemplate<
-    "DescriptionFieldTemplate",
-    T,
-    S,
-    F
-  >("DescriptionFieldTemplate", registry, options);
   // Button templates are not overridden in the uiSchema
   const {
     ButtonTemplates: { AddButton },
   } = registry.templates;
 
-  const direction = options.direction === "row" ? "row" : "column";
+  const direction = options.direction === 'row' ? 'row' : 'column';
 
   const legendNode = (
     <Group>
@@ -84,24 +79,22 @@ export default function ObjectFieldTemplate<
       id={idSchema.$id}
       legend={legendNode}
       style={{
-        width: "100%",
+        width: '100%',
       }}
     >
       <Box
         style={{
           flexDirection: direction,
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "16px",
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '16px',
         }}
       >
-        {properties.map(
-          (prop: ObjectFieldTemplatePropertyType) => prop.content,
-        )}
+        {properties.map((prop: ObjectFieldTemplatePropertyType) => prop.content)}
       </Box>
       {canExpand<T, S, F>(schema, uiSchema, formData) && (
         <AddButton
-          className="object-property-expand"
+          className='object-property-expand'
           onClick={onAddClick(schema)}
           disabled={disabled || readonly}
           uiSchema={uiSchema}

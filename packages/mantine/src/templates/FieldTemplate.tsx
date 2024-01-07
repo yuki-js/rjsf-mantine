@@ -5,10 +5,10 @@ import {
   StrictRJSFSchema,
   getTemplate,
   getUiOptions,
-} from "@rjsf/utils";
+} from '@rjsf/utils';
 
-import { Input } from "@mantine/core";
-import { getMantineProps, MaybeWrap } from "../util";
+import { Input } from '@mantine/core';
+import { getMantineProps, MaybeWrap } from '../../util';
 
 /** The `FieldTemplate` component is the template used by `SchemaField` to render any field. It renders the field
  * content, (label, description, children, errors and help) inside of a `WrapIfAdditional` component.
@@ -18,33 +18,20 @@ import { getMantineProps, MaybeWrap } from "../util";
 export default function FieldTemplate<
   T = any,
   S extends StrictRJSFSchema = RJSFSchema,
-  F extends FormContextType = any,
+  F extends FormContextType = any
 >(props: FieldTemplateProps<T, S, F>) {
-  const {
-    id,
-    children,
-    classNames,
-    style,
-    label,
-    help,
-    hidden,
-    registry,
-    schema,
-    uiSchema,
-    ...otherProps
-  } = props;
+  const { id, children, classNames, style, label, help, hidden, registry, schema, uiSchema, ...otherProps } = props;
   const mantineProps = getMantineProps<T, S, F>(otherProps);
   const { wrapContent } = mantineProps;
   const uiOptions = getUiOptions<T, S, F>(uiSchema);
-  const WrapIfAdditionalTemplate = getTemplate<
-    "WrapIfAdditionalTemplate",
-    T,
-    S,
-    F
-  >("WrapIfAdditionalTemplate", registry, uiOptions);
+  const WrapIfAdditionalTemplate = getTemplate<'WrapIfAdditionalTemplate', T, S, F>(
+    'WrapIfAdditionalTemplate',
+    registry,
+    uiOptions
+  );
 
   if (hidden) {
-    return <div style={{ display: "none" }}>{children}</div>;
+    return <div style={{ display: 'none' }}>{children}</div>;
   }
 
   return (
@@ -59,7 +46,7 @@ export default function FieldTemplate<
       {...otherProps}
     >
       <Input.Wrapper key={id}>
-        <MaybeWrap wrap={wrapContent} className="mantine-ui-field-content">
+        <MaybeWrap wrap={wrapContent} className='mantine-ui-field-content'>
           {children}
           {help}
         </MaybeWrap>

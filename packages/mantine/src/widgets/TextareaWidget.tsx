@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react';
 import {
   ariaDescribedByIds,
   labelValue,
@@ -6,8 +6,8 @@ import {
   RJSFSchema,
   StrictRJSFSchema,
   WidgetProps,
-} from "@rjsf/utils";
-import { Textarea } from "@mantine/core";
+} from '@rjsf/utils';
+import { Textarea } from '@mantine/core';
 
 /** The `TextareaWidget` is a widget for rendering input fields as textarea.
  *
@@ -16,7 +16,7 @@ import { Textarea } from "@mantine/core";
 export default function TextareaWidget<
   T = any,
   S extends StrictRJSFSchema = RJSFSchema,
-  F extends FormContextType = any,
+  F extends FormContextType = any
 >(props: WidgetProps<T, S, F>) {
   const {
     id,
@@ -36,7 +36,7 @@ export default function TextareaWidget<
   } = props;
 
   const _onChange = ({ target: { value } }: ChangeEvent<HTMLTextAreaElement>) =>
-    onChange && onChange(value === "" ? options.emptyValue : value);
+    onChange && onChange(value === '' ? options.emptyValue : value);
   const _onBlur = () => onBlur && onBlur(id, value);
   const _onFocus = () => onFocus && onFocus(id, value);
   return (
@@ -49,7 +49,7 @@ export default function TextareaWidget<
       autoFocus={autofocus}
       required={required}
       disabled={disabled || readonly}
-      value={value || ""}
+      value={value || ''}
       error={rawErrors.length > 0}
       rows={options.rows || 5}
       onChange={_onChange}

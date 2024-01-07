@@ -6,10 +6,10 @@ import {
   RJSFSchema,
   StrictRJSFSchema,
   WidgetProps,
-} from "@rjsf/utils";
+} from '@rjsf/utils';
 
-import { Checkbox } from "@mantine/core";
-import { ChangeEvent } from "react";
+import { Checkbox } from '@mantine/core';
+import { ChangeEvent } from 'react';
 
 /** The `CheckBoxWidget` is a widget for rendering boolean properties.
  *  It is typically used to represent a boolean.
@@ -19,14 +19,14 @@ import { ChangeEvent } from "react";
 export default function CheckboxWidget<
   T = any,
   S extends StrictRJSFSchema = RJSFSchema,
-  F extends FormContextType = any,
+  F extends FormContextType = any
 >(props: WidgetProps<T, S, F>) {
   const {
     id,
     value,
     disabled,
     readonly,
-    label = "",
+    label = '',
     hideLabel,
     autofocus,
     onChange,
@@ -41,8 +41,7 @@ export default function CheckboxWidget<
   // the "required" attribute if the field value must be "true", due to the
   // "const" or "enum" keywords
   const required = schemaRequiresTrueValue<S>(schema);
-  const _onChange = (event: ChangeEvent<HTMLInputElement>) =>
-    onChange && onChange(event.currentTarget.checked);
+  const _onChange = (event: ChangeEvent<HTMLInputElement>) => onChange && onChange(event.currentTarget.checked);
   const _onBlur = () => onBlur && onBlur(id, value);
   const _onFocus = () => onFocus && onFocus(id, value);
   const description = options.description ?? schema.description;
@@ -57,13 +56,9 @@ export default function CheckboxWidget<
       onChange={_onChange}
       onBlur={_onBlur}
       onFocus={_onFocus}
-      error={
-        rawErrors.length > 0
-          ? rawErrors.map((error, i) => <span key={i}>{error}</span>)
-          : undefined
-      }
+      error={rawErrors.length > 0 ? rawErrors.map((error, i) => <span key={i}>{error}</span>) : undefined}
       aria-describedby={ariaDescribedByIds<T>(id)}
-      checked={typeof value === "undefined" ? false : value}
+      checked={typeof value === 'undefined' ? false : value}
     />
   );
 }

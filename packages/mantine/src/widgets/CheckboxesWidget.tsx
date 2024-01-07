@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react';
 
 import {
   ariaDescribedByIds,
@@ -15,8 +15,8 @@ import {
   labelValue,
   enumOptionsValueForIndex,
   enumOptionsIndexForValue,
-} from "@rjsf/utils";
-import { Checkbox, Group, Input } from "@mantine/core";
+} from '@rjsf/utils';
+import { Checkbox, Group, Input } from '@mantine/core';
 
 /** The `CheckboxesWidget` is a widget for rendering checkbox groups.
  *  It is typically used to represent an array of enums.
@@ -26,7 +26,7 @@ import { Checkbox, Group, Input } from "@mantine/core";
 export default function CheckboxesWidget<
   T = any,
   S extends StrictRJSFSchema = RJSFSchema,
-  F extends FormContextType = any,
+  F extends FormContextType = any
 >(props: WidgetProps<T, S, F>) {
   const {
     id,
@@ -48,11 +48,7 @@ export default function CheckboxesWidget<
   const { enumOptions, enumDisabled } = options;
   const checkboxesValues = Array.isArray(value) ? value : [value];
 
-  const selectedIndices = enumOptionsIndexForValue<S>(
-    checkboxesValues,
-    enumOptions,
-    true,
-  ) as string[];
+  const selectedIndices = enumOptionsIndexForValue<S>(checkboxesValues, enumOptions, true) as string[];
 
   const _onBlur = () => onBlur(id, value);
   const _onFocus = () => onFocus(id, value);
@@ -60,22 +56,14 @@ export default function CheckboxesWidget<
   const description = options.description ?? schema.description;
 
   const _onChange = (nextIndices: string[]) => {
-    const nextValues = enumOptionsValueForIndex<S>(
-      nextIndices,
-      enumOptions,
-      [],
-    ) as T[];
+    const nextValues = enumOptionsValueForIndex<S>(nextIndices, enumOptions, []) as T[];
     onChange(nextValues);
   };
   return (
     <Checkbox.Group
       label={labelValue(label, hideLabel, false)}
       description={description}
-      error={
-        rawErrors.length > 0
-          ? rawErrors.map((error, i) => <span key={i}>{error}</span>)
-          : false
-      }
+      error={rawErrors.length > 0 ? rawErrors.map((error, i) => <span key={i}>{error}</span>) : false}
       onChange={_onChange}
       onBlur={_onBlur}
       onFocus={_onFocus}
@@ -91,16 +79,8 @@ export default function CheckboxesWidget<
               id={optionId(id, index)}
               key={index}
               label={option.label}
-              value={
-                enumOptionsIndexForValue<S>(
-                  option.value,
-                  enumOptions,
-                  false,
-                ) as string
-              }
-              disabled={
-                disabled || readonly || (enumDisabled ?? []).includes(index)
-              }
+              value={enumOptionsIndexForValue<S>(option.value, enumOptions, false) as string}
+              disabled={disabled || readonly || (enumDisabled ?? []).includes(index)}
               name={id}
               aria-describedby={ariaDescribedByIds<T>(id)}
             />

@@ -9,20 +9,18 @@ import {
   WidgetProps,
   enumOptionsIndexForValue,
   labelValue,
-} from "@rjsf/utils";
+} from '@rjsf/utils';
 
-import { Group, Radio } from "@mantine/core";
+import { Group, Radio } from '@mantine/core';
 
 /** The `RadioWidget` is a widget for rendering a radio group.
  *  It is typically used with a string property constrained with enum options.
  *
  * @param props - The `WidgetProps` for this component
  */
-export default function RadioWidget<
-  T = any,
-  S extends StrictRJSFSchema = RJSFSchema,
-  F extends FormContextType = any,
->(props: WidgetProps<T, S, F>) {
+export default function RadioWidget<T = any, S extends StrictRJSFSchema = RJSFSchema, F extends FormContextType = any>(
+  props: WidgetProps<T, S, F>
+) {
   const {
     id,
     value,
@@ -51,36 +49,21 @@ export default function RadioWidget<
       label={labelValue(label || undefined, hideLabel, false)}
       description={options.description}
       required={required}
-      value={
-        enumOptionsIndexForValue<S>(value, enumOptions, false) as
-          | string
-          | undefined
-      } // since I set multiple to false, this should not be an array, so I need to cast and suppress the error
+      value={enumOptionsIndexForValue<S>(value, enumOptions, false) as string | undefined} // since I set multiple to false, this should not be an array, so I need to cast and suppress the error
       onChange={_onChange}
       onBlur={_onBlur}
       onFocus={_onFocus}
-      error={
-        rawErrors.length > 0
-          ? rawErrors.map((error, i) => <span key={i}>{error}</span>)
-          : false
-      }
+      error={rawErrors.length > 0 ? rawErrors.map((error, i) => <span key={i}>{error}</span>) : false}
     >
       <Group>
         {enumOptions?.map((option, index) => {
-          const itemDisabled =
-            enumDisabled && enumDisabled.indexOf(option.value) !== -1;
+          const itemDisabled = enumDisabled && enumDisabled.indexOf(option.value) !== -1;
           return (
             <Radio
               id={optionId(id, index)}
               name={id}
               label={option.label}
-              value={
-                enumOptionsIndexForValue<S>(
-                  option.value,
-                  enumOptions,
-                  false,
-                ) as string
-              }
+              value={enumOptionsIndexForValue<S>(option.value, enumOptions, false) as string}
               key={index}
               disabled={disabled || itemDisabled || readonly}
               aria-describedby={ariaDescribedByIds<T>(id)}

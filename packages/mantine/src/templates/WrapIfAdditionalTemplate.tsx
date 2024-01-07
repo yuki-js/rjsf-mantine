@@ -1,4 +1,4 @@
-import { FocusEvent } from "react";
+import { FocusEvent } from 'react';
 import {
   ADDITIONAL_PROPERTY_FLAG,
   FormContextType,
@@ -6,8 +6,8 @@ import {
   StrictRJSFSchema,
   TranslatableString,
   WrapIfAdditionalTemplateProps,
-} from "@rjsf/utils";
-import { Group, TextInput, Box } from "@mantine/core";
+} from '@rjsf/utils';
+import { Group, TextInput, Box } from '@mantine/core';
 
 /** The `WrapIfAdditional` component is used by the `FieldTemplate` to rename, or remove properties that are
  * part of an `additionalProperties` part of a schema.
@@ -17,7 +17,7 @@ import { Group, TextInput, Box } from "@mantine/core";
 export default function WrapIfAdditionalTemplate<
   T = any,
   S extends StrictRJSFSchema = RJSFSchema,
-  F extends FormContextType = any,
+  F extends FormContextType = any
 >(props: WrapIfAdditionalTemplateProps<T, S, F>) {
   const {
     children,
@@ -50,14 +50,13 @@ export default function WrapIfAdditionalTemplate<
     );
   }
 
-  const handleBlur = ({ target }: FocusEvent<HTMLInputElement>) =>
-    onKeyChange(target.value);
+  const handleBlur = ({ target }: FocusEvent<HTMLInputElement>) => onKeyChange(target.value);
 
   return (
     <div className={classNames} style={style} key={`${id}-key`}>
-      <Group align="center">
+      <Group align='center'>
         <TextInput
-          className="form-group"
+          className='form-group'
           label={keyLabel}
           required={required}
           defaultValue={label}
@@ -66,12 +65,12 @@ export default function WrapIfAdditionalTemplate<
           name={`${id}`}
           onBlur={!readonly ? handleBlur : undefined}
           style={wrapperStyle}
-          type="text"
+          type='text'
         />
         <Box style={{ flexGrow: 1 }}>{children}</Box>
         <RemoveButton
-          iconType="mini"
-          className="array-item-remove"
+          iconType='mini'
+          className='array-item-remove'
           disabled={disabled || readonly}
           onClick={onDropPropertyClick(label)}
           uiSchema={uiSchema}

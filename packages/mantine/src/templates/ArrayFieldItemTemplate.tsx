@@ -1,10 +1,5 @@
-import {
-  ArrayFieldTemplateItemType,
-  FormContextType,
-  RJSFSchema,
-  StrictRJSFSchema,
-} from "@rjsf/utils";
-import { Group, Box } from "@mantine/core";
+import { ArrayFieldTemplateItemType, FormContextType, RJSFSchema, StrictRJSFSchema } from '@rjsf/utils';
+import { Group, Box } from '@mantine/core';
 
 /** The `ArrayFieldItemTemplate` component is the template used to render an items of an array.
  *
@@ -13,7 +8,7 @@ import { Group, Box } from "@mantine/core";
 export default function ArrayFieldItemTemplate<
   T = any,
   S extends StrictRJSFSchema = RJSFSchema,
-  F extends FormContextType = any,
+  F extends FormContextType = any
 >(props: ArrayFieldTemplateItemType<T, S, F>) {
   const {
     children,
@@ -31,17 +26,16 @@ export default function ArrayFieldItemTemplate<
     uiSchema,
     registry,
   } = props;
-  const { CopyButton, MoveDownButton, MoveUpButton, RemoveButton } =
-    registry.templates.ButtonTemplates;
+  const { CopyButton, MoveDownButton, MoveUpButton, RemoveButton } = registry.templates.ButtonTemplates;
 
   return (
     <Box>
       {children}
       {hasToolbar && (hasMoveUp || hasMoveDown || hasRemove || hasCopy) && (
-        <Group justify="flex-end">
+        <Group justify='flex-end'>
           {(hasMoveUp || hasMoveDown) && (
             <MoveUpButton
-              className="array-item-move-up"
+              className='array-item-move-up'
               disabled={disabled || readonly || !hasMoveUp}
               onClick={onReorderClick(index, index - 1)}
               uiSchema={uiSchema}
@@ -50,7 +44,7 @@ export default function ArrayFieldItemTemplate<
           )}
           {(hasMoveUp || hasMoveDown) && (
             <MoveDownButton
-              className="array-item-move-down"
+              className='array-item-move-down'
               disabled={disabled || readonly || !hasMoveDown}
               onClick={onReorderClick(index, index + 1)}
               uiSchema={uiSchema}
@@ -59,7 +53,7 @@ export default function ArrayFieldItemTemplate<
           )}
           {hasCopy && (
             <CopyButton
-              className="array-item-copy"
+              className='array-item-copy'
               disabled={disabled || readonly}
               onClick={onCopyIndexClick(index)}
               uiSchema={uiSchema}
@@ -68,7 +62,7 @@ export default function ArrayFieldItemTemplate<
           )}
           {hasRemove && (
             <RemoveButton
-              className="array-item-remove"
+              className='array-item-remove'
               disabled={disabled || readonly}
               onClick={onDropIndexClick(index)}
               uiSchema={uiSchema}

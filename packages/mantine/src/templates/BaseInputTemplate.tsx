@@ -1,5 +1,5 @@
-import { ChangeEvent } from "react";
-import { TextInput } from "@mantine/core";
+import { ChangeEvent } from 'react';
+import { TextInput } from '@mantine/core';
 
 import {
   ariaDescribedByIds,
@@ -10,7 +10,7 @@ import {
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
-} from "@rjsf/utils";
+} from '@rjsf/utils';
 
 /** The `BaseInputTemplate` is the template to use to render the basic `<input>` component for the `core` theme.
  * It is used as the template for rendering many of the <input> based widgets that differ by `type` and callbacks only.
@@ -21,7 +21,7 @@ import {
 export default function BaseInputTemplate<
   T = any,
   S extends StrictRJSFSchema = RJSFSchema,
-  F extends FormContextType = any,
+  F extends FormContextType = any
 >(props: BaseInputTemplateProps<T, S, F>) {
   const {
     id,
@@ -44,7 +44,7 @@ export default function BaseInputTemplate<
   } = props;
   const inputProps = getInputProps<T, S, F>(schema, type, options);
   const _onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
-    onChange(value === "" ? options.emptyValue : value);
+    onChange(value === '' ? options.emptyValue : value);
   const _onBlur = () => onBlur && onBlur(id, value);
   const _onFocus = () => onFocus && onFocus(id, value);
 
@@ -62,12 +62,8 @@ export default function BaseInputTemplate<
         autoFocus={autofocus}
         disabled={disabled || readonly}
         list={schema.examples ? examplesId<T>(id) : undefined}
-        value={value || value === 0 ? value : ""}
-        error={
-          rawErrors.length > 0
-            ? rawErrors.map((error, i) => <span key={i}>{error}</span>)
-            : false
-        }
+        value={value || value === 0 ? value : ''}
+        error={rawErrors.length > 0 ? rawErrors.map((error, i) => <span key={i}>{error}</span>) : false}
         onChange={onChangeOverride || _onChange}
         onBlur={_onBlur}
         onFocus={_onFocus}
@@ -76,11 +72,7 @@ export default function BaseInputTemplate<
       {Array.isArray(schema.examples) && (
         <datalist id={examplesId<T>(id)}>
           {(schema.examples as string[])
-            .concat(
-              schema.default && !schema.examples.includes(schema.default)
-                ? ([schema.default] as string[])
-                : [],
-            )
+            .concat(schema.default && !schema.examples.includes(schema.default) ? ([schema.default] as string[]) : [])
             .map((example) => {
               return <option key={example} value={example} />;
             })}
