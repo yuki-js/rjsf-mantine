@@ -49,8 +49,6 @@ export default function ObjectFieldTemplate<
     ButtonTemplates: { AddButton },
   } = registry.templates;
 
-  const direction = options.direction === 'row' ? 'row' : 'column';
-
   const legendNode = (
     <Group gap='xs'>
       {title && (
@@ -82,16 +80,7 @@ export default function ObjectFieldTemplate<
         width: '100%',
       }}
     >
-      <Box
-        style={{
-          flexDirection: direction,
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '16px',
-        }}
-      >
-        {properties.map((prop: ObjectFieldTemplatePropertyType) => prop.content)}
-      </Box>
+      <Box>{properties.map((prop: ObjectFieldTemplatePropertyType) => prop.content)}</Box>
       {canExpand<T, S, F>(schema, uiSchema, formData) && (
         <AddButton
           className='object-property-expand'
