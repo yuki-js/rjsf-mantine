@@ -11,6 +11,7 @@ import AltDateTimeWidget from './AltDateTimeWidget';
 import AltDateWidget from './AltDateWidget';
 import RangeWidget from './RangeWidget';
 import RatingWidget from './RatingWidget';
+import FileWidget from './FileWidget';
 
 export function generateWidgets<
   T = any,
@@ -29,6 +30,7 @@ export function generateWidgets<
     AltDateTimeWidget,
     RangeWidget,
     RatingWidget,
+    FileWidget,
   };
 }
 
