@@ -39,6 +39,21 @@ const date: Sample = {
           },
         },
       },
+      mantine: {
+        title: 'Mantine',
+        description: 'Mantine date and time pickers',
+        type: 'object',
+        properties: {
+          datetime: {
+            type: 'string',
+            format: 'date-time',
+          },
+          date: {
+            type: 'string',
+            format: 'date',
+          },
+        },
+      },
     },
   },
   uiSchema: {
@@ -56,6 +71,14 @@ const date: Sample = {
           yearsRange: [1980, 2030],
           format: 'MDY',
         },
+      },
+    },
+    mantine: {
+      datetime: {
+        'ui:widget': 'MantineDateTimeWidget',
+      },
+      date: {
+        'ui:widget': 'MantineDateWidget',
       },
     },
   },

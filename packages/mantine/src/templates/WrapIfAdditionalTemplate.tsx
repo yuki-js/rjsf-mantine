@@ -55,21 +55,23 @@ export default function WrapIfAdditionalTemplate<
   return (
     <div className={classNames} style={style} key={`${id}-key`}>
       <Group align='center'>
-        <TextInput
-          className='form-group'
+        <TextInput // key input
           label={keyLabel}
           required={required}
           defaultValue={label}
           disabled={disabled || (readonlyAsDisabled && readonly)}
-          id={`${id}`}
-          name={`${id}`}
+          id={id}
+          name={id}
           onBlur={!readonly ? handleBlur : undefined}
           style={wrapperStyle}
           type='text'
         />
-        <Box style={{ flexGrow: 1 }}>{children}</Box>
+        <Box
+          style={{ flexGrow: 1 }} // value input as children
+        >
+          {children}
+        </Box>
         <RemoveButton
-          iconType='mini'
           className='array-item-remove'
           disabled={disabled || readonly}
           onClick={onDropPropertyClick(label)}

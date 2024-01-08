@@ -7,9 +7,6 @@ import {
   getUiOptions,
 } from '@rjsf/utils';
 
-import { Input } from '@mantine/core';
-import { getMantineProps, MaybeWrap } from '../util';
-
 /** The `FieldTemplate` component is the template used by `SchemaField` to render any field. It renders the field
  * content, (label, description, children, errors and help) inside of a `WrapIfAdditional` component.
  *
@@ -21,8 +18,6 @@ export default function FieldTemplate<
   F extends FormContextType = any
 >(props: FieldTemplateProps<T, S, F>) {
   const { id, children, classNames, style, label, help, hidden, registry, schema, uiSchema, ...otherProps } = props;
-  const mantineProps = getMantineProps<T, S, F>(otherProps);
-  const { wrapContent } = mantineProps;
   const uiOptions = getUiOptions<T, S, F>(uiSchema);
   const WrapIfAdditionalTemplate = getTemplate<'WrapIfAdditionalTemplate', T, S, F>(
     'WrapIfAdditionalTemplate',
@@ -34,6 +29,7 @@ export default function FieldTemplate<
     return <div style={{ display: 'none' }}>{children}</div>;
   }
 
+  // TODO: If there is a field or template that don't support label or description, add exceptions here
   return (
     <WrapIfAdditionalTemplate
       classNames={classNames}
@@ -45,12 +41,8 @@ export default function FieldTemplate<
       uiSchema={uiSchema}
       {...otherProps}
     >
-      <Input.Wrapper key={id}>
-        <MaybeWrap wrap={wrapContent} className='mantine-ui-field-content'>
-          {children}
-          {help}
-        </MaybeWrap>
-      </Input.Wrapper>
+      {children}
+      {help}
     </WrapIfAdditionalTemplate>
   );
 }

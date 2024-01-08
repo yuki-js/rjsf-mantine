@@ -36,6 +36,12 @@ const numbers: Sample = {
         maximum: 100,
         multipleOf: 10,
       },
+      ratings: {
+        title: 'Ratings (integer)',
+        type: 'integer',
+        minimum: 1,
+        maximum: 5,
+      },
     },
   },
   uiSchema: {
@@ -53,6 +59,9 @@ const numbers: Sample = {
     },
     integerRangeSteps: {
       'ui:widget': 'range',
+    },
+    ratings: {
+      'ui:widget': 'RatingWidget',
     },
   },
   formData: {

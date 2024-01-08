@@ -14,6 +14,7 @@ import TitleFieldTemplate from './TitleFieldTemplate';
 import DescriptionFieldTemplate from './DescriptionFieldTemplate';
 import ArrayFieldItemTemplate from './ArrayFieldItemTemplate';
 import ArrayFieldTemplate from './ArrayFieldTemplate';
+import FieldHelpTemplate from './FieldHelpTemplate';
 
 export function generateTemplates<
   T = any,
@@ -36,6 +37,7 @@ export function generateTemplates<
     ErrorListTemplate,
     ButtonTemplates,
     FieldTemplate,
+    FieldHelpTemplate,
     WrapIfAdditionalTemplate,
     ObjectFieldTemplate,
     TitleFieldTemplate,

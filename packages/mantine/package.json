@@ -37,6 +37,8 @@
     "react": ">=17",
     "@mantine/core": ">=7.4.0",
     "@mantine/hooks": ">=7.4.0",
+    "@mantine/dates": ">=7.4.0",
+    "dayjs": ">=1.11.10",
     "@tabler/icons-react": ">=2.45.0"
   },
   "publishConfig": {

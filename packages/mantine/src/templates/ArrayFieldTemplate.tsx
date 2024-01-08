@@ -1,17 +1,14 @@
 import {
   getTemplate,
   getUiOptions,
-  isFixedItems,
   ArrayFieldTemplateProps,
   ArrayFieldTemplateItemType,
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
-  UI_OPTIONS_KEY,
 } from '@rjsf/utils';
 
-import { cleanClassNames, getMantineProps } from '../util';
-import { Group, Stack, Divider } from '@mantine/core';
+import { Group, Fieldset } from '@mantine/core';
 
 /** The `ArrayFieldTemplate` component is the template used to render all items in an array.
  *
@@ -23,29 +20,19 @@ export default function ArrayFieldTemplate<
   F extends FormContextType = any
 >(props: ArrayFieldTemplateProps<T, S, F>) {
   const {
-    uiSchema,
-    idSchema,
     canAdd,
     className,
-    // classNames, This is not part of the type, so it is likely never passed in
     disabled,
-    formContext,
+    idSchema,
+    uiSchema,
     items,
     onAddClick,
-    // options, This is not part of the type, so it is likely never passed in
     readonly,
+    registry,
     required,
     schema,
     title,
-    registry,
   } = props;
-  const mantineProps = getMantineProps<T, S, F>({
-    uiSchema,
-    formContext,
-    defaultSchemaProps: { horizontalButtons: true, wrapItem: false },
-  });
-  const { horizontalButtons, wrapItem } = mantineProps;
-  const mantine = { horizontalButtons, wrapItem };
   const uiOptions = getUiOptions<T, S, F>(uiSchema);
   const ArrayFieldDescriptionTemplate = getTemplate<'ArrayFieldDescriptionTemplate', T, S, F>(
     'ArrayFieldDescriptionTemplate',
@@ -67,59 +54,45 @@ export default function ArrayFieldTemplate<
     ButtonTemplates: { AddButton },
   } = registry.templates;
 
-  const arrFields = items?.map(
-    ({ key, uiSchema: itemUiSchema = {}, ...props }: ArrayFieldTemplateItemType<T, S, F>) => {
-      // Merge in the mantine props from the ArrayFieldTemplate into each of the items
-      const mergedUiSchema = {
-        ...itemUiSchema,
-        [UI_OPTIONS_KEY]: {
-          ...itemUiSchema[UI_OPTIONS_KEY],
-          mantine,
-        },
-      };
-      return <ArrayFieldItemTemplate key={key} {...props} uiSchema={mergedUiSchema} />;
-    }
-  );
-
   const _title = uiOptions.title || title;
-  let dividers;
-  if (arrFields.length > 0) {
-    dividers = (
-      <>
-        <Divider my='xs' label={`${_title || '配列'} の先頭`} labelPosition='center' />
-        {arrFields}
-        <Divider my='xs' label={`${_title || '配列'} の末尾`} labelPosition='center' />
-      </>
-    );
-  } else {
-    dividers = <Divider my='xs' label={`なにも入っていません。追加しましょう。`} labelPosition='center' />;
-  }
-  return (
-    <Stack className={cleanClassNames([className, isFixedItems<S>(schema) ? '' : 'sortable-form-fields'])}>
-      <Group align='center' justify='space-between'>
-        <Group>
-          <ArrayFieldTitleTemplate
-            idSchema={idSchema}
-            title={_title}
-            schema={schema}
-            uiSchema={uiSchema}
-            required={required}
-            registry={registry}
-          />
-          <ArrayFieldDescriptionTemplate
-            idSchema={idSchema}
-            description={uiOptions.description || schema.description}
-            schema={schema}
-            uiSchema={uiSchema}
-            registry={registry}
-          />
-        </Group>
-        {canAdd && (
-          <AddButton onClick={onAddClick} disabled={disabled || readonly} uiSchema={uiSchema} registry={registry} />
-        )}
-      </Group>
+  const legendNode = (
+    <Group gap='xs'>
+      {title && (
+        <ArrayFieldTitleTemplate
+          idSchema={idSchema}
+          title={_title}
+          required={required}
+          schema={schema}
+          uiSchema={uiSchema}
+          registry={registry}
+        />
+      )}
 
-      {dividers}
-    </Stack>
+      <ArrayFieldDescriptionTemplate
+        idSchema={idSchema}
+        description={uiOptions.description || schema.description}
+        schema={schema}
+        uiSchema={uiSchema}
+        registry={registry}
+      />
+    </Group>
+  );
+  return (
+    <Fieldset
+      id={idSchema.$id}
+      legend={legendNode}
+      style={{
+        width: '100%',
+      }}
+      className={className}
+    >
+      {items &&
+        items.map(({ key, ...itemProps }: ArrayFieldTemplateItemType<T, S, F>) => (
+          <ArrayFieldItemTemplate key={key} {...itemProps} />
+        ))}
+      {canAdd && (
+        <AddButton onClick={onAddClick} disabled={disabled || readonly} uiSchema={uiSchema} registry={registry} />
+      )}
+    </Fieldset>
   );
 }

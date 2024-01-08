@@ -5,14 +5,17 @@ import { IconChevronDown, IconChevronUp, IconCopy, IconTrash } from '@tabler/ico
 function IconButton<T = any, S extends StrictRJSFSchema = RJSFSchema, F extends FormContextType = any>(
   props: IconButtonProps<T, S, F>
 ) {
-  const { icon, iconType, color, className, ...otherProps } = props;
+  // eliminate uiSchema and registry from props, which are not accepted by ActionIcon
+  const { iconType, icon, uiSchema: _uiSchema, registry: _registry, color, title, ...rest } = props;
   return (
     <ActionIcon
       size={iconType as ButtonProps['size']}
       variant='light'
       color={color as ButtonProps['color']}
-      className={className}
-      {...otherProps}
+      aria-label={title}
+      title={title}
+      role='button'
+      {...rest}
     >
       {icon}
     </ActionIcon>

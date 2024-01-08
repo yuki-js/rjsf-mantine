@@ -52,7 +52,7 @@ export default function ObjectFieldTemplate<
   const direction = options.direction === 'row' ? 'row' : 'column';
 
   const legendNode = (
-    <Group>
+    <Group gap='xs'>
       {title && (
         <TitleFieldTemplate
           id={titleId<T>(idSchema)}

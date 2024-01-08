@@ -9,7 +9,8 @@ import {
   enumOptionsValueForIndex,
   enumOptionsIndexForValue,
 } from '@rjsf/utils';
-import { Checkbox, Group } from '@mantine/core';
+import { Box, Checkbox } from '@mantine/core';
+import { FocusEvent, useCallback } from 'react';
 
 /** The `CheckboxesWidget` is a widget for rendering checkbox groups.
  *  It is typically used to represent an array of enums.
@@ -24,7 +25,7 @@ export default function CheckboxesWidget<
   const {
     id,
     disabled,
-    options,
+    options: { inline = false, enumOptions, enumDisabled, emptyValue, ...options },
     value,
     autofocus,
     readonly,
@@ -38,13 +39,21 @@ export default function CheckboxesWidget<
     rawErrors = [],
   } = props;
 
-  const { enumOptions, enumDisabled } = options;
   const checkboxesValues = Array.isArray(value) ? value : [value];
 
   const selectedIndices = enumOptionsIndexForValue<S>(checkboxesValues, enumOptions, true) as string[];
 
-  const _onBlur = () => onBlur(id, value);
-  const _onFocus = () => onFocus(id, value);
+  const handleBlur = useCallback(
+    ({ target: { value } }: FocusEvent<HTMLInputElement>) =>
+      onBlur(id, enumOptionsValueForIndex<S>(value, enumOptions, emptyValue)),
+    [onBlur, id]
+  );
+
+  const handleFocus = useCallback(
+    ({ target: { value } }: FocusEvent<HTMLInputElement>) =>
+      onFocus(id, enumOptionsValueForIndex<S>(value, enumOptions, emptyValue)),
+    [onFocus, id]
+  );
 
   const description = options.description ?? schema.description;
 
@@ -58,14 +67,20 @@ export default function CheckboxesWidget<
       description={description}
       error={rawErrors.length > 0 ? rawErrors.map((error, i) => <span key={i}>{error}</span>) : false}
       onChange={_onChange}
-      onBlur={_onBlur}
-      onFocus={_onFocus}
+      onBlur={handleBlur}
+      onFocus={handleFocus}
       value={selectedIndices}
       id={id}
       required={required}
       autoFocus={autofocus}
     >
-      <Group>
+      <Box
+        style={{
+          display: 'flex',
+          flexDirection: inline ? 'row' : 'column',
+          gap: '0.5rem',
+        }}
+      >
         {enumOptions?.map((option, index) => {
           return (
             <Checkbox
@@ -79,7 +94,7 @@ export default function CheckboxesWidget<
             />
           );
         })}
-      </Group>
+      </Box>
     </Checkbox.Group>
   );
 }

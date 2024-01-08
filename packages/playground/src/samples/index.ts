@@ -32,6 +32,7 @@ import options from './options';
 import ifThenElse from './ifThenElse';
 import customField from './customField';
 import { Sample } from './Sample';
+import k8spodspec from './k8spodspec';
 
 const _samples: Record<string, Sample> = {
   Blank: { schema: {}, uiSchema: {}, formData: {} },
@@ -68,6 +69,7 @@ const _samples: Record<string, Sample> = {
   ErrorSchema: errorSchema,
   Defaults: defaults,
   'Custom Field': customField,
+  'Kubernetes PodSpec': k8spodspec,
 };
 
 export const samples = { ..._samples };

@@ -3,7 +3,7 @@
  * @param props - The `FieldErrorProps` for the errors being rendered
  */
 export default function FieldErrorTemplate() {
-  // TODO: this should take over controls currently owned by SchemaField
+  // TODO: Field error are displayed by each field, so this template is not needed
   // for now, it just rendering nothing
   return null;
 }

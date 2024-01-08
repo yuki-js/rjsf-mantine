@@ -30,6 +30,7 @@ export function Playground() {
       value={schemaStr}
       autosize
       error={schemaFailed ? 'Invalid JSON' : false}
+      maxRows={20}
     />
   );
   // JSON Schema area end
@@ -54,6 +55,7 @@ export function Playground() {
       value={uiSchemaStr}
       autosize
       error={uiSchemaFailed ? 'Invalid JSON' : false}
+      maxRows={20}
     />
   );
   // UI Schema area end
@@ -80,6 +82,7 @@ export function Playground() {
       value={formDataStr}
       autosize
       error={formDataFailed ? 'Invalid JSON' : false}
+      maxRows={20}
     />
   );
   // Form data area end
@@ -117,6 +120,7 @@ export function Playground() {
       onChange={changeHdl}
       allowDeselect
       style={{ flexGrow: 1 }}
+      searchable
     />
   );
   // Preset area end

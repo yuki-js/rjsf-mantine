@@ -7,9 +7,8 @@ import {
   StrictRJSFSchema,
   WidgetProps,
 } from '@rjsf/utils';
-
+import { ChangeEvent, FocusEvent, useCallback } from 'react';
 import { Checkbox } from '@mantine/core';
-import { ChangeEvent } from 'react';
 
 /** The `CheckBoxWidget` is a widget for rendering boolean properties.
  *  It is typically used to represent a boolean.
@@ -41,21 +40,32 @@ export default function CheckboxWidget<
   // the "required" attribute if the field value must be "true", due to the
   // "const" or "enum" keywords
   const required = schemaRequiresTrueValue<S>(schema);
-  const _onChange = (event: ChangeEvent<HTMLInputElement>) => onChange && onChange(event.currentTarget.checked);
-  const _onBlur = () => onBlur && onBlur(id, value);
-  const _onFocus = () => onFocus && onFocus(id, value);
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => onChange(event.target.checked),
+    [onChange]
+  );
+
+  const handleBlur = useCallback(
+    (event: FocusEvent<HTMLInputElement>) => onBlur(id, event.target.checked),
+    [onBlur, id]
+  );
+
+  const handleFocus = useCallback(
+    (event: FocusEvent<HTMLInputElement>) => onFocus(id, event.target.checked),
+    [onFocus, id]
+  );
   const description = options.description ?? schema.description;
   return (
     <Checkbox
       description={description}
       id={id}
-      label={labelValue(<span>{label}</span>, hideLabel)}
+      label={labelValue(label, hideLabel)}
       required={required}
       disabled={disabled || readonly}
       autoFocus={autofocus}
-      onChange={_onChange}
-      onBlur={_onBlur}
-      onFocus={_onFocus}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      onFocus={handleFocus}
       error={rawErrors.length > 0 ? rawErrors.map((error, i) => <span key={i}>{error}</span>) : undefined}
       aria-describedby={ariaDescribedByIds<T>(id)}
       checked={typeof value === 'undefined' ? false : value}
